@@ -74,8 +74,8 @@ static AGAssertionHandler *handler = nil;
     
     va_start(ap, format);
     message =
-    [NSString
-     stringWithFormat: @"%@:%ld Assertion failed in %@. %@",
+    [NSString 
+     stringWithFormat: @"%@:%ld Assertion failed in %@. %@", 
      fileName, (long)line, functionName, format];
     NSLogv(message, ap);
     
@@ -101,8 +101,8 @@ static AGAssertionHandler *handler = nil;
     
     va_start(ap, format);
     message =
-    [NSString
-     stringWithFormat: @"%@:%ld Assertion failed in %@[%@ %@]. %@",
+    [NSString 
+     stringWithFormat: @"%@:%ld Assertion failed in %@[%@ %@]. %@", 
      fileName, (long)line, class_isMetaClass([object class]) ? @"+" : @"-",
      NSStringFromClass([object class]),
      NSStringFromSelector(aSelector), format];
