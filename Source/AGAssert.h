@@ -29,9 +29,10 @@
 #endif
 
 #if !AG_BLOCK_ASSERTIONS
-#define AGAssert(condition, desc, ...)	\
+
+# define AGAssert(condition, desc, ...)	\
     do {				\
-	__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
+        __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
         if (!(condition)) {		\
             NSString *format = [NSString stringWithFormat:@"%@. %@", [NSString stringWithFormat:@"'AGAssert(%s)' failed", #condition], (desc)];\
             [[AGAssertionHandler currentHandler] handleFailureInMethod:_cmd \
@@ -41,10 +42,10 @@
         __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
     } while(0)
 
-#define AGCAssert(condition, desc, ...) \
+# define AGCAssert(condition, desc, ...) \
     do {				\
-	__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
-	if (!(condition)) {		\
+        __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
+        if (!(condition)) {		\
             NSString *format = [NSString stringWithFormat:@"%@. %@", [NSString stringWithFormat:@"'AGCAssert(%s)' failed", #condition], (desc)];\
             [[AGAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] \
                 file:[NSString stringWithUTF8String:__FILE__] \
@@ -53,10 +54,11 @@
         __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
     } while(0)
 
+# define AGParameterAssert(condition) AGAssert((condition), @"Invalid parameter not satisfying: %s", #condition)
+
 #else
-
-#define AGAssert(condition, desc, ...)
-#define AGCAssert(condition, desc, ...)
-
+# define AGAssert(condition, desc, ...)
+# define AGCAssert(condition, desc, ...)
+# define AGParameterAssert(condition) 
 #endif
 
