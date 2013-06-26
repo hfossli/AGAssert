@@ -9,8 +9,7 @@ Pod::Spec.new do |s|
     :git => "https://github.com/hfossli/AGAssert.git",
     :tag => s.version.to_s
     }
-  s.source_files    = 'IVYCore/**/*.{h,m}'
-  s.exclude_files   = 'IVYCoreTests/**/*Test.{h,m}'
+  s.source_files    = 'Source/**/*.{h,m}'
   s.frameworks      = 'SystemConfiguration', 'IOKit', 'CoreGraphics', 'UIKit', 'QuartzCore'
   s.platform        = :ios
   s.requires_arc    = true
