@@ -16,5 +16,6 @@ Pod::Spec.new do |s|
     :tag => s.version.to_s
     }
   s.source_files    = 'Source/*.{h,m}'
-  s.requires_arc = true
+  s.exclude_files   = 'Source/*Test.{h,m}'
+  s.requires_arc    = true
 end
