@@ -42,7 +42,7 @@
 
 /* Begin PBXFileReference section */
 		A38039FA179F003800E6A9F7 /* AGAssertTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAssertTest.m; sourceTree = "<group>"; };
-		A38039FC179F13C000E6A9F7 /* AGAssert.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = AGAssert.podspec; sourceTree = "<group>"; };
+		A38039FD179F14BA00E6A9F7 /* AGAssert.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; name = AGAssert.podspec; path = ../AGAssert.podspec; sourceTree = "<group>"; };
 		A39B2522170C2F2500C9A0BB /* AGAssertDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AGAssertDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A39B2525170C2F2500C9A0BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A39B2527170C2F2500C9A0BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -102,7 +102,7 @@
 				A39B2552170C2F2500C9A0BB /* AGAssertDemoTests */,
 				A39B2524170C2F2500C9A0BB /* Frameworks */,
 				A39B2523170C2F2500C9A0BB /* Products */,
-				A38039FC179F13C000E6A9F7 /* AGAssert.podspec */,
+				A38039FD179F14BA00E6A9F7 /* AGAssert.podspec */,
 			);
 			sourceTree = "<group>";
 		};
