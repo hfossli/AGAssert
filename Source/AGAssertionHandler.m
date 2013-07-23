@@ -44,7 +44,7 @@ static AGAssertionHandler *handler = nil;
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        handler = [[AGAssertionHandler alloc] init];
+        handler = [[self alloc] init];
     });
 }
 
@@ -58,7 +58,6 @@ static AGAssertionHandler *handler = nil;
     handler = newHandler;
 }
 
-
 /**
  * Handles an assertion failure by using NSLogv() to print an error
  * message built from the supplied arguments, and then raising an
@@ -69,17 +68,15 @@ static AGAssertionHandler *handler = nil;
                      lineNumber:(NSInteger)line
                     description:(NSString *)format, ...
 {
-    id	message;
-    va_list	ap;
-    
-    va_start(ap, format);
-    message =
+    NSString *messageFormat =
     [NSString 
      stringWithFormat: @"%@:%ld Assertion failed in %@. %@", 
      fileName, (long)line, functionName, format];
-    NSLogv(message, ap);
     
-    [NSException raise:NSInternalInconsistencyException format:message arguments:ap];
+    va_list	ap;
+    va_start(ap, format);
+    NSLogv(messageFormat, ap);
+    [NSException raise:NSInternalInconsistencyException format:messageFormat arguments:ap];
     va_end(ap);
     
     AG_UNREACHABLE(); // abort / exit - not reachable
@@ -96,19 +93,18 @@ static AGAssertionHandler *handler = nil;
                    lineNumber:(NSInteger)line
                   description:(NSString *)format, ...
 {
-    id	message;
-    va_list	ap;
-    
-    va_start(ap, format);
-    message =
-    [NSString 
-     stringWithFormat: @"%@:%ld Assertion failed in %@[%@ %@]. %@", 
+        
+    NSString *messageFormat =
+    [NSString
+     stringWithFormat: @"%@:%ld Assertion failed in %@[%@ %@]. %@",
      fileName, (long)line, class_isMetaClass([object class]) ? @"+" : @"-",
      NSStringFromClass([object class]),
      NSStringFromSelector(aSelector), format];
-    NSLogv(message, ap);
     
-    [NSException raise:NSInternalInconsistencyException format:message arguments:ap];
+    va_list	ap;
+    va_start(ap, format);
+    NSLogv(messageFormat, ap);
+    [NSException raise:NSInternalInconsistencyException format:messageFormat arguments:ap];
     va_end(ap);
     
     AG_UNREACHABLE(); // abort / exit - not reachable

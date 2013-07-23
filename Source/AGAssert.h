@@ -34,10 +34,9 @@
     do {				\
         __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
         if (!(condition)) {		\
-            NSString *format = [NSString stringWithFormat:@"%@. %@", [NSString stringWithFormat:@"'AGAssert(%s)' failed", #condition], (desc)];\
             [[AGAssertionHandler currentHandler] handleFailureInMethod:_cmd \
                 object:self file:[NSString stringWithUTF8String:__FILE__] \
-                lineNumber:__LINE__ description:format, ##__VA_ARGS__]; \
+                lineNumber:__LINE__ description:desc, ##__VA_ARGS__]; \
         }				\
         __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
     } while(0)
@@ -46,10 +45,9 @@
     do {				\
         __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
         if (!(condition)) {		\
-            NSString *format = [NSString stringWithFormat:@"%@. %@", [NSString stringWithFormat:@"'AGCAssert(%s)' failed", #condition], (desc)];\
             [[AGAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] \
                 file:[NSString stringWithUTF8String:__FILE__] \
-                lineNumber:__LINE__ description:format, ##__VA_ARGS__]; \
+                lineNumber:__LINE__ description:desc, ##__VA_ARGS__]; \
         }				\
         __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
     } while(0)
