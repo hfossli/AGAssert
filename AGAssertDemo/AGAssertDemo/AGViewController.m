@@ -27,21 +27,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (IBAction)assertObjectiveC:(id)sender
-//{
-//    BOOL test = NO;
-//    AGAssert(test, @"something wrong with '%i'?", test);
-//}
-//
-//- (IBAction)assertC:(id)sender
-//{
-//    assertC();
-//}
-//
-//static void assertC()
-//{
-//    BOOL test = NO;
-//    AGCAssert(test, @"something wrong with '%i'?", test);
-//}
+- (IBAction)assertObjectiveC:(id)sender
+{
+    BOOL test = NO;
+    AGAssert(test, @"something wrong with '%i'?", test);
+}
+
+- (IBAction)assertC:(id)sender
+{
+    assertC();
+}
+
+static void assertC()
+{
+    BOOL test = NO;
+    AGCAssert(test, @"something wrong with '%i'?", test);
+}
 
 @end
