@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name            = "AGAssert"
-  s.version         = "0.1.2"
+  s.version         = "0.2"
   s.summary         = "The better alternative to NSAssert."
   s.homepage        = "https://github.com/hfossli/AGAssert"
   s.license         = { :type => 'MIT', :file => 'LICENSE' }
