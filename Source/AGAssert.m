@@ -22,13 +22,3 @@
 // THE SOFTWARE.
 
 #import "AGAssert.h"
-
-NSString * buildString(NSString *conditionString, NSString *desc, ...)
-{
-    NSString *format = [NSString stringWithFormat:@"%@, %@", conditionString, desc];
-    va_list	ap;
-    va_start(ap, desc);
-    NSString *string = [[NSString alloc] initWithFormat:format arguments:ap];
-    va_end(ap);
-    return string;
-}

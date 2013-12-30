@@ -26,8 +26,6 @@
 		A39B2557170C2F2500C9A0BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A39B2555170C2F2500C9A0BB /* InfoPlist.strings */; };
 		A39B2571170C2F6500C9A0BB /* AGAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B256E170C2F6500C9A0BB /* AGAssert.m */; };
 		A39B2572170C2F6500C9A0BB /* AGAssert.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B256E170C2F6500C9A0BB /* AGAssert.m */; };
-		A39B2573170C2F6500C9A0BB /* AGAssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B2570170C2F6500C9A0BB /* AGAssertionHandler.m */; };
-		A39B2574170C2F6500C9A0BB /* AGAssertionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = A39B2570170C2F6500C9A0BB /* AGAssertionHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +64,8 @@
 		A39B2556170C2F2500C9A0BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A39B256D170C2F6500C9A0BB /* AGAssert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAssert.h; sourceTree = "<group>"; };
 		A39B256E170C2F6500C9A0BB /* AGAssert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAssert.m; sourceTree = "<group>"; };
-		A39B256F170C2F6500C9A0BB /* AGAssertionHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGAssertionHandler.h; sourceTree = "<group>"; };
-		A39B2570170C2F6500C9A0BB /* AGAssertionHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGAssertionHandler.m; sourceTree = "<group>"; };
+		A3D777651871C76600AD2724 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		A3D777661871C76600AD2724 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +101,8 @@
 				A39B2524170C2F2500C9A0BB /* Frameworks */,
 				A39B2523170C2F2500C9A0BB /* Products */,
 				A38039FD179F14BA00E6A9F7 /* AGAssert.podspec */,
+				A3D777651871C76600AD2724 /* LICENSE */,
+				A3D777661871C76600AD2724 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,8 +176,6 @@
 			children = (
 				A39B256D170C2F6500C9A0BB /* AGAssert.h */,
 				A39B256E170C2F6500C9A0BB /* AGAssert.m */,
-				A39B256F170C2F6500C9A0BB /* AGAssertionHandler.h */,
-				A39B2570170C2F6500C9A0BB /* AGAssertionHandler.m */,
 				A38039FA179F003800E6A9F7 /* AGAssertTest.m */,
 			);
 			name = Source;
@@ -300,7 +298,6 @@
 				A39B2536170C2F2500C9A0BB /* AGAppDelegate.m in Sources */,
 				A39B253F170C2F2500C9A0BB /* AGViewController.m in Sources */,
 				A39B2571170C2F6500C9A0BB /* AGAssert.m in Sources */,
-				A39B2573170C2F6500C9A0BB /* AGAssertionHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A39B2572170C2F6500C9A0BB /* AGAssert.m in Sources */,
-				A39B2574170C2F6500C9A0BB /* AGAssertionHandler.m in Sources */,
 				A38039FB179F003800E6A9F7 /* AGAssertTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

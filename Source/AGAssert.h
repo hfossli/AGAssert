@@ -22,7 +22,9 @@
 // THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "AGAssertionHandler.h"
+#include "objc/runtime.h"
+#include <stdint.h>
+#include <stdio.h>
 
 #if !defined(AG_BLOCK_ASSERTIONS)
 # define AG_BLOCK_ASSERTIONS 0
@@ -30,26 +32,40 @@
 
 #if !AG_BLOCK_ASSERTIONS
 
-# define AGAssert(condition, desc, ...)	\
-    do {				\
-        __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
-        if (!(condition)) {		\
-            [[AGAssertionHandler currentHandler] handleFailureInMethod:_cmd \
-                object:self file:[NSString stringWithUTF8String:__FILE__] \
-                lineNumber:__LINE__ description:desc, ##__VA_ARGS__]; \
-        }				\
-        __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
+# define AGAssert(expression, ...) \
+    do {\
+        if (!(expression)) {	\
+                NSString *description = [NSString stringWithFormat:@"" __VA_ARGS__]; \
+                NSString *reason = [NSString \
+                    stringWithFormat: @"Assertion failed with expression (%s) in %@:%i %s. %@", \
+                    #expression, \
+                    [[NSString stringWithUTF8String:__FILE__] lastPathComponent], \
+                    __LINE__, \
+                    __PRETTY_FUNCTION__, \
+                    description]; \
+                NSLog(@"Description: %@", description); \
+                NSLog(@"Reason: %@", reason); \
+                [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise]; \
+                abort(); \
+        } \
     } while(0)
 
-# define AGCAssert(condition, desc, ...) \
-    do {				\
-        __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
-        if (!(condition)) {		\
-            [[AGAssertionHandler currentHandler] handleFailureInFunction:[NSString stringWithUTF8String:__PRETTY_FUNCTION__] \
-                file:[NSString stringWithUTF8String:__FILE__] \
-                lineNumber:__LINE__ description:desc, ##__VA_ARGS__]; \
-        }				\
-        __PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
+# define AGCAssert(expression, ...) \
+    do {\
+        if (!(expression)) {	\
+                NSString *description = [NSString stringWithFormat:@"" __VA_ARGS__]; \
+                NSString *reason = [NSString \
+                    stringWithFormat: @"Assertion failed with expression (%s) in %@:%i %s. %@", \
+                    #expression, \
+                    [[NSString stringWithUTF8String:__FILE__] lastPathComponent], \
+                    __LINE__, \
+                    __PRETTY_FUNCTION__, \
+                    description]; \
+                NSLog(@"Description: %@", description); \
+                NSLog(@"Reason: %@", reason); \
+                [[NSException exceptionWithName:NSInternalInconsistencyException reason:reason userInfo:nil] raise]; \
+                abort(); \
+        } \
     } while(0)
 
 # define AGParameterAssert(condition) AGAssert((condition), @"Invalid parameter not satisfying: %s", #condition)

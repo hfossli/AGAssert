@@ -12,98 +12,121 @@
 #include <stdint.h>
 #include <stdio.h>
 
-@interface AGDemoAssertionHandler : AGAssertionHandler
-
-@property (nonatomic, strong) NSString *lastErrorString;
-
-@end
-
-@implementation AGDemoAssertionHandler
-
-- (void)handleFailureInFunction:(NSString *)functionName
-                           file:(NSString *)fileName
-                     lineNumber:(NSInteger)line
-                    description:(NSString *)format, ...
-{
-    va_list	ap;
-    va_start(ap, format);
-    
-    if(format == nil)
-    {
-        self.lastErrorString = @"No description";
-    }
-    else
-    {
-        self.lastErrorString = [[NSString alloc] initWithFormat:format arguments:ap];
-    }
-    
-    va_end(ap);
-}
-
-- (void)handleFailureInMethod:(SEL) aSelector
-                       object:(id)object
-                         file:(NSString *)fileName
-                   lineNumber:(NSInteger)line
-                  description:(NSString *)format, ...
-{
-    va_list	ap;
-    va_start(ap, format);
-    
-    if(format == nil)
-    {
-        self.lastErrorString = @"No description";
-    }
-    else
-    {
-        self.lastErrorString = [[NSString alloc] initWithFormat:format arguments:ap];
-    }
-    
-    va_end(ap);
-}
-
-@end
-
-
-
 @interface AGAssertTest : SenTestCase
 
 @end
 
 @implementation AGAssertTest
 
-#pragma mark - Construct and destruct
-
-- (void)setUp
+- (void)testAGAssert_NoDescription
 {
-    [super setUp];
+    NSString *reason;
+    @try {
+        int a = 1;
+        int b = 0;
+        AGAssert(a == b);
+    }
+    @catch (NSException *exception) {
+        reason = exception.reason;
+    }
+    @finally {
+        STAssertEqualObjects(reason, @"Assertion failed with expression (a == b) in AGAssertTest.m:27 -[AGAssertTest testAGAssert_NoDescription]. ", nil);
+    }
 }
 
-- (void)tearDown
+- (void)testAGAssert_SimpleDescription
 {
-    [AGAssertionHandler setCurrentHandler:[AGAssertionHandler new]];
-    [super tearDown];
+    NSString *reason;
+    @try {
+        int a = 1;
+        int b = 0;
+        AGAssert(a == b, @"Might be a stupid developer lurking here.");
+    }
+    @catch (NSException *exception) {
+        reason = exception.reason;
+    }
+    @finally {
+        STAssertEqualObjects(reason, @"Assertion failed with expression (a == b) in AGAssertTest.m:43 -[AGAssertTest testAGAssert_SimpleDescription]. Might be a stupid developer lurking here.", nil);
+    }
 }
 
-#pragma mark - Tests
-
-- (void)testStringIsCorrect
+- (void)testAGAssert_DescriptionWithParams
 {
-    AGDemoAssertionHandler *handler = [AGDemoAssertionHandler new];
-    [AGAssertionHandler setCurrentHandler:handler];
-    
-    STAssertNil(handler.lastErrorString, nil);
-    
-    AGAssert(FALSE, nil);
-    STAssertEqualObjects(handler.lastErrorString, @"No description", nil);
-    
-    AGAssert(FALSE, @"Some text");
-    STAssertEqualObjects(handler.lastErrorString, @"Some text", nil);
-    
-    AGAssert(FALSE, @"Some text with param %@", @"hello");
-    STAssertEqualObjects(handler.lastErrorString, @"Some text with param hello", nil);
-    
-    AGParameterAssert(1 == 2);
-    STAssertEqualObjects(handler.lastErrorString, @"Invalid parameter not satisfying: 1 == 2", nil);
+    NSString *reason;
+    @try {
+        int a = 1;
+        int b = 0;
+        AGAssert(a == b, @"Might be a stupid developer lurking. Expecting %i to be equal to %i.", a, b);
+    }
+    @catch (NSException *exception) {
+        reason = exception.reason;
+    }
+    @finally {
+        STAssertEqualObjects(reason, @"Assertion failed with expression (a == b) in AGAssertTest.m:59 -[AGAssertTest testAGAssert_DescriptionWithParams]. Might be a stupid developer lurking. Expecting 1 to be equal to 0.", nil);
+    }
+}
+
+static void triggerAGCAssert_NoDescription()
+{
+    int a = 1;
+    int b = 0;
+    AGCAssert(a == b);
+}
+
+static void triggerAGCAssert_SimpleDescription()
+{
+    int a = 1;
+    int b = 0;
+    AGCAssert(a == b, @"Might be a stupid developer lurking here.");
+}
+
+static void triggerAGCAssert_DescriptionWithParams()
+{
+    int a = 1;
+    int b = 0;
+    AGCAssert(a == b, @"Might be a stupid developer lurking. Expecting %i to be equal to %i.", a, b);
+}
+
+- (void)testAGCAssert_NoDescription
+{
+    NSString *reason;
+    @try {
+        triggerAGCAssert_NoDescription();
+    }
+    @catch (NSException *exception) {
+        reason = exception.reason;
+    }
+    @finally {
+        STAssertEqualObjects(reason, @"Assertion failed with expression (a == b) in AGAssertTest.m:73 void triggerAGCAssert_NoDescription(). ", nil);
+    }
+}
+
+- (void)testAGCAssert_SimpleDescription
+{
+    NSString *reason;
+    @try {
+        triggerAGCAssert_SimpleDescription();
+    }
+    @catch (NSException *exception) {
+        reason = exception.reason;
+    }
+    @finally {
+        STAssertEqualObjects(reason, @"Assertion failed with expression (a == b) in AGAssertTest.m:80 void triggerAGCAssert_SimpleDescription(). Might be a stupid developer lurking here.", nil);
+    }
+}
+
+- (void)testAGCAssert_DescriptionWithParams
+{
+    NSString *reason;
+    @try {
+        triggerAGCAssert_DescriptionWithParams();
+    }
+    @catch (NSException *exception) {
+        reason = exception.reason;
+    }
+    @finally {
+        STAssertEqualObjects(reason, @"Assertion failed with expression (a == b) in AGAssertTest.m:87 void triggerAGCAssert_DescriptionWithParams(). Might be a stupid developer lurking. Expecting 1 to be equal to 0.", nil);
+    }
 }
 
 @end
